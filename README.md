@@ -1,3 +1,4 @@
+
 # BrowseGate
 
 BrowseGate is a local-first research assistant for Google Chrome. It keeps saved webpages, notes, research workspaces, and browsing context together in a side panel, with practical tools for organizing and revisiting research.
@@ -6,7 +7,9 @@ The project folder also retains source files for a standalone C++ navigation-sta
 
 ## Problem and intended users
 
-Research often gets scattered across browser tabs, bookmarks, notes, and files. BrowseGate gives students, independent researchers, and knowledge workers one place to save useful pages, attach context, search what they have collected, and return to a group of tabs later. It is a lightweight personal workflow aid, not a replacement for library databases or professional reference-management software.
+Research often gets scattered across browser tabs, bookmarks, notes, and files. BrowseGate gives students, independent researchers, and knowledge workers one place to save useful pages, attach context, search what they have collected, and return to a group of tabs later.
+
+It is a lightweight personal workflow aid, not a replacement for library databases or professional reference-management software.
 
 ## Features
 
@@ -22,30 +25,35 @@ Research often gets scattered across browser tabs, bookmarks, notes, and files. 
 
 ## Technology and architecture
 
-BrowseGate is a dependency-free JavaScript ES module Chrome Extension using Manifest V3, the Side Panel API, IndexedDB, Chrome extension APIs, and plain HTML/CSS. The packaging and test commands use Node.js built-ins; no framework, build bundler, backend, account, or package installation is needed for core functionality.
+BrowseGate is a dependency-free JavaScript ES module Chrome Extension using Manifest V3, the Side Panel API, IndexedDB, Chrome extension APIs, and plain HTML/CSS.
 
-`manifest.json` declares the extension entry points and permissions. `src/popup` contains the toolbar popup; `src/sidepanel` contains the UI and route handling; `src/services` contains focused data and feature services; `src/core` handles IndexedDB and errors; and `src/background` reconciles the alarm-backed focus timer. `scripts/package-extension.mjs` creates a clean loadable package at `dist/browseback`.
+The packaging and test commands use Node.js built-ins; no framework, build bundler, backend, account, or package installation is needed for core functionality.
+
+`manifest.json` declares the extension entry points and permissions. `src/popup` contains the toolbar popup; `src/sidepanel` contains the UI and route handling; `src/services` contains focused data and feature services; `src/core` handles IndexedDB and errors; and `src/background` reconciles the alarm-backed focus timer.
+
+`scripts/package-extension.mjs` creates a clean loadable package at `dist/browseback`.
 
 ### Project structure
 
 ```text
-manifest.json                  Chrome MV3 manifest
-package.json                   Node scripts (no third-party dependencies)
-scripts/package-extension.mjs  Extension packager
+manifest.json              Chrome MV3 manifest
+package.json               Node scripts (no third-party dependencies)
+scripts/
+  package-extension.mjs    Extension packager
 src/
-  background/                  Service worker and focus timer alarms
-  core/                        IndexedDB schema, transactions, errors
-  icons/                       Extension icon assets
-  popup/                       Toolbar popup
-  services/                    Research, history, sessions, tools, exports
-  sidepanel/                   Main application interface
-  styles/                      Shared design tokens
-tests/                         Node built-in test suite
-dist/browseback/               Generated unpacked extension package
-README.md                      Project and installation guide
-FINAL_TEST_REPORT.md           Per-test automated results and manual checks
-Browser_Sim.cpp, Stack.cpp,
-main.cpp, matching headers     Retained C++ navigation-stack demo sources
+  background/              Service worker and focus timer alarms
+  core/                    IndexedDB schema, transactions, errors
+  icons/                   Extension icon assets
+  popup/                   Toolbar popup
+  services/                Research, history, sessions, tools, exports
+  sidepanel/               Main application interface
+  styles/                  Shared design tokens
+tests/                     Node built-in test suite
+dist/browseback/           Generated unpacked extension package
+README.md                  Project and installation guide
+FINAL_TEST_REPORT.md       Per-test automated results and manual checks
+Browser_Sim.cpp, Stack.cpp, main.cpp, matching headers
+                           Retained C++ navigation-stack demo sources
 ```
 
 ## Installation in Chrome
@@ -61,6 +69,7 @@ This project is not installed from the Chrome Web Store. Use Google Chrome 116 o
    ```
 
    If npm is available, the equivalent script is `npm run build:extension`.
+
 4. In Chrome, open `chrome://extensions`.
 5. Turn on **Developer mode**.
 6. Select **Load unpacked** and choose the `dist/browseback` directory (the directory containing the generated `manifest.json`).
@@ -72,14 +81,18 @@ The generated package has no runtime installation step. The extension can be use
 
 ## Development and tests
 
-Edit files under `src/`. The package script copies the extension source and manifest into `dist/browseback`, then verifies that manifest entry points exist. The Node tests use only built-in modules.
+Edit files under `src/`. The package script copies the extension source and manifest into `dist/browseback`, then verifies that manifest entry points exist.
+
+The Node tests use only built-in modules.
 
 ```powershell
 node --test tests/*.test.js
 node scripts/package-extension.mjs
 ```
 
-For a full browser check, load or reload `dist/browseback` as described above, then follow the demonstration sequence below and the manual test checklist in [FINAL_TEST_REPORT.md](FINAL_TEST_REPORT.md). Automated tests do not emulate Chrome's permission prompts, browser UI, extension lifecycle, or real history.
+For a full browser check, load or reload `dist/browseback` as described above, then follow the demonstration sequence below and the manual test checklist in [FINAL_TEST_REPORT.md](FINAL_TEST_REPORT.md).
+
+Automated tests do not emulate Chrome's permission prompts, browser UI, extension lifecycle, or real history.
 
 ## Permissions and privacy
 
@@ -87,15 +100,27 @@ Required permissions: `sidePanel` opens the side panel; `storage` retains small 
 
 Optional permissions: `history` is requested for History and Insights; `clipboardRead` and `clipboardWrite` are requested when the user chooses paste or copy.
 
-Research records, notes, sessions, and reading status are kept in local IndexedDB in the Chrome profile. Theme and small preferences use `chrome.storage.local`. No telemetry, cloud service, account, bundled provider, or provider secret is included. The extension pages use a restrictive content security policy and do not load remote executable scripts.
+Research records, notes, sessions, and reading status are kept in local IndexedDB in the Chrome profile. Theme and small preferences use `chrome.storage.local`.
+
+No telemetry, cloud service, account, bundled provider, or provider secret is included. The extension pages use a restrictive content security policy and do not load remote executable scripts.
 
 ## Exports, data, and limitations
 
-Workspace exports are generated locally in Markdown (`.md`), plain text (`.txt`), or JSON (`.json`). Users can select source and note content and whether to include metadata. JSON export is a manual backup; JSON import/restore is not implemented. Deleting the extension or clearing its site data can remove locally stored records, so retain exports separately when a backup is needed.
+Workspace exports are generated locally in Markdown (`.md`), plain text (`.txt`), or JSON (`.json`). Users can select source and note content and whether to include metadata.
+
+JSON export is a manual backup; JSON import/restore is not implemented.
+
+Deleting the extension or clearing its site data can remove locally stored records, so retain exports separately when a backup is needed.
 
 Existing summary records from earlier BrowseGate versions remain in an existing browser profile’s IndexedDB. The current extension does not display or export them, and it does not delete or migrate them.
 
-History analytics query up to 200 candidate URLs and count returned visits; they are not a complete time-spent or productivity measurement. History results depend on Chrome's stored history and permission. Restricted Chrome pages cannot be saved/restored as ordinary web pages. Citation output is a formatting aid: verify metadata, style details, and source claims before submission. No live Chrome runtime was available for automated validation.
+History analytics query up to 200 candidate URLs and count returned visits; they are not a complete time-spent or productivity measurement. History results depend on Chrome's stored history and permission.
+
+Restricted Chrome pages cannot be saved/restored as ordinary web pages.
+
+Citation output is a formatting aid: verify metadata, style details, and source claims before submission.
+
+No live Chrome runtime was available for automated validation.
 
 ## Live demonstration (about 4–6 minutes)
 
@@ -126,6 +151,10 @@ Allow extra time for Chrome permission prompts, network loading, and file dialog
 
 ## License and project status
 
-No license file is currently included; ask the project owner before redistribution. This is a student/demo project and has not undergone production security review. See [FINAL_TEST_REPORT.md](FINAL_TEST_REPORT.md) for exactly what was and was not verified.
-#   B r o w s e - G a t e  
- 
+No license file is currently included; ask the project owner before redistribution.
+
+This is a student/demo project and has not undergone production security review.
+
+See [FINAL_TEST_REPORT.md](FINAL_TEST_REPORT.md) for exactly what was and was not verified.
+
+# Browse-Gate
