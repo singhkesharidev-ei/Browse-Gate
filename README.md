@@ -1,4 +1,4 @@
-#BrowseGate
+# BrowseGate
 
 BrowseGate is a local-first research assistant for Google Chrome. It keeps saved webpages, notes, research workspaces, and browsing context together in a side panel, with practical tools for organizing and revisiting research.
 
