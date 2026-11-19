@@ -1,4 +1,5 @@
 
+
 # BrowseGate
 
 BrowseGate is a local-first research assistant for Google Chrome. It keeps saved webpages, notes, research workspaces, and browsing context together in a side panel, with practical tools for organizing and revisiting research.
@@ -151,5 +152,10 @@ Allow extra time for Chrome permission prompts, network loading, and file dialog
 
 ## License and project status
 
-No license file is currently included; ask the project owner before redistribution. This is a student/demo project and has not undergone production security review. See [FINAL_TEST_REPORT.md](FINAL_TEST_REPORT.md) for exactly what was and was not verified.
-# BrowseGate
+No license file is currently included; ask the project owner before redistribution.
+
+This is a student/demo project and has not undergone production security review.
+
+See [FINAL_TEST_REPORT.md](FINAL_TEST_REPORT.md) for exactly what was and was not verified.
+
+# Browse-Gate
