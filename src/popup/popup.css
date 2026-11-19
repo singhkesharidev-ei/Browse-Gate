@@ -1,0 +1,25 @@
+* { box-sizing: border-box; }
+body { width: 340px; margin: 0; background: var(--canvas); color: var(--ink); font: 12px/1.5 var(--font, "Segoe UI", sans-serif); }
+header { height: 58px; padding: 0 16px; display: flex; align-items: center; gap: 10px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.brand-mark { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; color: #fff; background: #496b8a; font-size: 13px; font-weight: 700; }
+header strong, header div span { display: block; }
+header strong { font-size: 12px; }
+header div span { color: var(--ink-muted); font-size: 10px; }
+main { padding: 15px; }
+.current-page { padding: 12px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); }
+.eyebrow { margin: 0 0 5px; color: var(--ink-muted); font-size: 9px; font-weight: 700; letter-spacing: 1px; }
+.title { margin: 0; overflow-wrap: anywhere; font-size: 12px; font-weight: 650; }
+.url { margin: 5px 0 0; color: var(--ink-muted); font-size: 10px; overflow-wrap: anywhere; }
+.form-label { display: block; margin: 14px 0 5px; color: var(--ink-soft); font-size: 10px; font-weight: 600; }
+select, textarea { width: 100%; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); font: inherit; }
+textarea { min-height: 70px; resize: vertical; }
+.button-row { display: flex; gap: 7px; margin-top: 12px; }
+button { min-height: 34px; padding: 0 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink-soft); font: inherit; font-size: 10px; font-weight: 600; cursor: pointer; }
+button:hover { color: var(--ink); background: var(--surface-muted); }
+button:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 60%, transparent); outline-offset: 2px; }
+button.primary { flex: 1; border-color: var(--accent-strong); background: var(--accent-strong); color: #fff; }
+.message { margin-top: 10px; padding: 9px; border-radius: 8px; color: var(--success); background: color-mix(in srgb, var(--success) 10%, var(--surface)); font-size: 10px; }
+.message.error { color: var(--danger); background: color-mix(in srgb, var(--danger) 9%, var(--surface)); }
+.loading { padding: 16px; color: var(--ink-muted); text-align: center; }
+.small-actions { display: grid; gap: 7px; margin-top: 10px; }
+.small-actions button { width: 100%; }
